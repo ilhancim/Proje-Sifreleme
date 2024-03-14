@@ -126,7 +126,7 @@ int main()
 				break;
 				
 			case 2:
-				cout<<"Desifreleme yontemi seciniz. \n1-Sezar \n2-Transposition \n3-Affine \n4-Fplsc \n5-Vigenere \n";
+				cout<<"Desifreleme yontemi seciniz. \n1-Transposition \n2-Affine \n3-Sezar \n4-Fplsc \n5-Vigenere \n";
 				c:
 				cout<<">-<\n ";
 				cin>>secim2;
