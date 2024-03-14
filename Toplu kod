@@ -1,0 +1,451 @@
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <cmath>
+using namespace std;
+string transpositionSifreleme(char sifre[], int anahtar);
+string transpositionDesifreleme(char sifre[], int anahtar);
+string affineSifreleme(char metin[]);
+string affineDesifreleme(char metin[]);
+string sezarSifreleme(char metin[]);
+string sezarDesifreleme(char metin[]);
+string vigenereSifreleme(char metin[]);
+string vigenereDesifreleme(char metin[]);
+string Fplsc(const string& text);
+int dosyaKaydet(string metin);
+int main()
+{
+	int secim, secim2;
+	char metin[50];
+	
+	cout<<"Merhabalar! Yapmak istediginiz islemi seciniz. \n1-Sifreleme \n2-Desifreleme \n";
+	a:
+	cout<<">-<\n ";
+	cin>>secim;
+	cout<<">-<\n";
+	
+	switch(secim)
+	{
+		case 1:
+			cout<<"Sifreleme yontemi seciniz. \n1-Transposition \n2-Affine \n3-Sezar \n4-Fplsc \n5-Vigenere \n";
+			b:
+			cout<<">-<\n ";
+			cin>>secim2;
+			cout<<">-<\n";
+			
+			switch(secim2)
+			{
+				case 1:
+					cout<<"Transposition sifreleme yontemini sectiniz."<<endl
+						<<"Sifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Transposition / ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(transpositionSifreleme(metin, 3));
+					dosyaKaydet("\n");
+					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+			
+					cout<<"Metnin sifrelenmis hali: "<<transpositionSifreleme(metin, 3);
+					break;
+						
+				case 2:
+					cout<<"Affine sifreleme yontemini sectiniz."<<endl
+						<<"Sifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Affine / ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(affineSifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+			
+					cout<<"Metnin sifrelenmis hali: "<<metin;
+					break;
+				
+				case 3:
+					cout<<"Sezar sifreleme yontemini sectiniz."<<endl
+						<<"Sifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Sezar / ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(sezarSifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+			
+					cout<<"Metnin sifrelenmis hali: "<<metin;
+					break;
+				
+				case 4:
+				{
+					string text;
+					cout<<"Fplsc sifreleme yontemini sectiniz."<<endl
+						<<"Sifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					getline(cin, text);
+					
+					dosyaKaydet("Fplsc / ");
+					dosyaKaydet(text);
+					dosyaKaydet(" = ");
+					dosyaKaydet(Fplsc(text));
+					dosyaKaydet("\n");
+					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+					
+   					cout<<"Metnin sifrelenmis hali: "<<Fplsc(text);
+					break;
+				}
+				
+				case 5:
+					cout<<"Vigenere sifreleme yontemini sectiniz."<<endl
+						<<"Sifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Vigenere / ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(vigenereSifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+					
+					cout<<"Metnin sifrelenmis hali: "<<vigenereSifreleme(metin);
+					break;
+					
+				default:
+					cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
+					goto b;
+			}
+			break;
+			
+		case 2:
+			cout<<"Desifreleme yontemi seciniz. \n1-Sezar \n2-Transposition \n3-Affine \n4-Fplsc \n5-Vigenere \n";
+			c:
+			cout<<">-<\n ";
+			cin>>secim2;
+			cout<<">-<\n";
+			
+			switch(secim2)
+			{
+				case 1:
+					cout<<"Transposition desifreleme yontemini sectiniz."<<endl
+						<<"Desifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+								
+					dosyaKaydet("Transposition \\ ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(transpositionDesifreleme(metin, 3));
+					dosyaKaydet("\n");
+					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+
+					cout<<"Metnin desifrelenmis hali: "<<transpositionDesifreleme(metin, 3);
+					break;
+					
+				case 2:
+					cout<<"Affine desifreleme yontemini sectiniz."<<endl
+						<<"Desifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Affine \\ ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(affineDesifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+			
+					cout<<"Metnin desifrelenmis hali: "<<metin;
+					break;
+					
+				case 3:
+					cout<<"Sezar desifreleme yontemini sectiniz."<<endl
+						<<"Desifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Sezar \\ ");
+					dosyaKaydet(metin);
+        		    dosyaKaydet(" = ");
+					dosyaKaydet(sezarDesifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+			
+					cout<<"Metnin desifrelenmis hali: "<<metin;
+					break;
+				
+				case 4:
+					{
+					string text;
+					cout<<"Fplsc desifreleme yontemini sectiniz."<<endl
+						<<"Desifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					getline(cin, text);
+					
+					dosyaKaydet("Fplsc \\ ");
+					dosyaKaydet(text);
+					dosyaKaydet(" = ");
+					dosyaKaydet(Fplsc(text));
+					dosyaKaydet("\n");
+					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+					
+   					cout<<"Metnin desifrelenmis hali: "<<Fplsc(text);
+					break;
+					}
+				
+				case 5:
+					cout<<"Vigenere desifreleme yontemini sectiniz."<<endl
+						<<"Desifrelemek istediginiz metni giriniz: ";
+					cin.ignore();
+					cin.getline(metin, 50);
+					
+					dosyaKaydet("Vigenere \\ ");
+					dosyaKaydet(metin);
+					dosyaKaydet(" = ");
+					dosyaKaydet(vigenereDesifreleme(metin));
+					dosyaKaydet("\n");
+					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+					
+					cout<<"Desifrelenmis metin: "<<vigenereDesifreleme(metin);
+					break;	
+					
+				default:
+					cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
+					goto c;
+			}
+			break;
+
+		default:
+			cout<<"Yalnizca 1 veya 2 seciniz. \n";
+			goto a;
+	}
+	
+	return 0;
+}
+string transpositionSifreleme(char metin[], int anahtar) 
+{
+	int satirSayisi=ceil((float)strlen(metin)/anahtar); 
+	char sifre[satirSayisi][anahtar];
+	
+	int sayac=0;
+	for (int i=0;i<satirSayisi;i++) 
+		for (int j=0;j<anahtar;j++) 
+		{
+			sifre[i][j]=metin[sayac];
+			sayac++;
+		}
+			
+	char sifre2[anahtar*satirSayisi];
+	sayac=0;
+	for (int i=0;i<anahtar;i++) 
+		for (int j=0;j<satirSayisi;j++)
+			{
+			sifre2[sayac]=sifre[j][i];
+			sayac++;
+			}
+			
+	return sifre2;
+
+}
+string transpositionDesifreleme(char sifre[], int anahtar) 
+{
+    int satirSayisi=ceil((float)strlen(sifre)/anahtar);
+    char sifreMatris[satirSayisi][anahtar];
+
+    int sayac=0;
+    for (int i=0;i<anahtar;i++) 
+        for (int j=0;j<satirSayisi;j++) 
+		{
+            sifreMatris[j][i]=sifre[sayac];
+            sayac++;
+        }
+
+    char desifrelenmisMetin[strlen(sifre)];
+    sayac=0;
+    for (int i=0;i<satirSayisi;i++) 
+        for (int j=0;j<anahtar;j++) 
+		{
+            desifrelenmisMetin[sayac]=sifreMatris[i][j];
+            sayac++;
+        }
+
+	return desifrelenmisMetin;
+}
+string affineSifreleme(char metin[]) 
+{
+	for(int i=0;i<=strlen(metin)-1;i++)
+		metin[i]=2*(metin[i]-63)+3;
+		
+	return metin;
+}
+string affineDesifreleme(char sifre[]) 
+{
+    for(int i=0;i<=strlen(sifre)-1;i++)
+		sifre[i]=(sifre[i]-3)/2+63;
+		
+	return sifre;
+}
+
+string sezarSifreleme(char metin[]) 
+{	
+	for(int i=0;i<=strlen(metin)-1;i++)
+		metin[i]+=5;
+	
+	return metin;
+}
+string sezarDesifreleme(char sifre[]) 
+{
+	for(int i=0;i<=strlen(sifre)-1;i++)
+		sifre[i]-=5;
+		
+	return sifre;
+}
+string Fplsc(const string& text) 
+{
+    string sifrelenmis_metin = "";
+    const string part1 = "abcdefg";
+    const string part2 = "hijklm";
+    const string part3 = "nopqrs";
+    const string part4 = "tuvwxyz";
+	
+	const string part5 = "abcdefg";
+	const string part6 = "hijklm";
+	const string part7 = "nopqrst";
+	const string part8 = "uvwxyz";
+	
+    for (string::size_type i = 0; i < text.length(); ++i) 
+	{
+        char c = text[i];
+        if (isalpha(c)) 
+		{
+            if (islower(c)) 
+			{
+                if (part1.find(c) != string::npos) 
+                    sifrelenmis_metin += part4[part1.find(c)];
+            
+				else if (part2.find(c) != string::npos) 
+                    sifrelenmis_metin += part3[part2.find(c)];
+                    
+                else if (part3.find(c) != string::npos) 
+                    sifrelenmis_metin += part2[part3.find(c)];
+                    
+                else if (part4.find(c) != string::npos) 
+                    sifrelenmis_metin+= part1[part4.find(c)];
+            } 
+            
+			else 
+			{
+                if (part5.find(tolower(c)) != string::npos) 
+                    sifrelenmis_metin += toupper(part7[part5.find(tolower(c))]);
+                
+				else if (part6.find(tolower(c)) != string::npos) 
+                    sifrelenmis_metin += toupper(part8[part6.find(tolower(c))]);
+                
+				else if (part7.find(tolower(c)) != string::npos) 
+                    sifrelenmis_metin += toupper(part5[part7.find(tolower(c))]);
+                
+				else if (part8.find(tolower(c)) != string::npos) 
+                    sifrelenmis_metin += toupper(part6[part8.find(tolower(c))]);
+            }
+        } 
+        
+		else 
+            sifrelenmis_metin += c; 
+    }
+
+    return sifrelenmis_metin;
+}
+string vigenereSifreleme(char metin[]) 
+{	
+	const string anahtar1 = "AZLKDFGHYEEBGP";
+	const string anahtar2 =	"azlkdfghyeebgp";
+    string sifreli = metin;
+    int j = 0;
+
+    for (int i = 0; i < strlen(metin); ++i) 
+    {
+        char karakter = metin[i];
+        char baslangic;
+        char kayma;
+        if (isalpha(karakter)) // Harf kontrolü yapar, harf olmayanları çevirmez
+        {
+            if (islower(karakter)) 
+            {
+                baslangic = 'a';
+                char harf = anahtar2[j % 14];
+                kayma = harf - baslangic + 1;
+            } 
+
+            else 
+            {
+                baslangic = 'A';
+                char harf = anahtar1[j % 14];
+                kayma = harf - baslangic + 1;
+            }
+            
+            karakter = baslangic + (karakter - baslangic + kayma) % 26;
+            ++j;
+        }
+        
+        sifreli[i] = karakter;
+    }
+
+    return sifreli;
+}
+string vigenereDesifreleme(char sifreli[]) 
+{
+	const string anahtar1 = "AZLKDFGHYEEBGP";
+	const string anahtar2 =	"azlkdfghyeebgp";
+    string orijinal = sifreli;
+    int j = 0;
+
+    for (int i = 0; i < strlen(sifreli); ++i) 
+    {
+        char karakter = sifreli[i];
+        char baslangic;
+
+        if (islower(karakter)) 
+            baslangic = 'a';
+
+        else 
+            baslangic = 'A';
+        
+        char kayma;
+
+        if (isalpha(karakter)) 
+        {
+            if (islower(karakter)) 
+            {
+                char harf = anahtar2[j % 14];
+                kayma = harf - baslangic + 1;
+            } 
+
+            else 
+            {
+                char harf = anahtar1[j % 14];
+                kayma = harf - baslangic + 1;
+            }
+            
+            karakter = baslangic + (karakter - baslangic - kayma + 26) % 26;
+            ++j;
+        }
+        
+        orijinal[i] = karakter;
+    }
+
+    return orijinal;
+}
+int dosyaKaydet(string metin)
+{
+	ofstream kaydet("sifrelemeLog.txt", ios::app);
+	
+	kaydet<<metin;
+	kaydet.close();
+}
