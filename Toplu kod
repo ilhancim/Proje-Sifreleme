@@ -15,218 +15,224 @@ string Fplsc(const string& text);
 int dosyaKaydet(string metin);
 int main()
 {
-	int secim, secim2;
+	int secim = 1, secim2;
 	char metin[50];
-	
-	cout<<"Merhabalar! Yapmak istediginiz islemi seciniz. \n1-Sifreleme \n2-Desifreleme \n";
-	a:
-	cout<<">-<\n ";
-	cin>>secim;
-	cout<<">-<\n";
-	
-	switch(secim)
+	while(secim!=0)
 	{
-		case 1:
-			cout<<"Sifreleme yontemi seciniz. \n1-Transposition \n2-Affine \n3-Sezar \n4-Fplsc \n5-Vigenere \n";
-			b:
-			cout<<">-<\n ";
-			cin>>secim2;
-			cout<<">-<\n";
-			
-			switch(secim2)
-			{
-				case 1:
-					cout<<"Transposition sifreleme yontemini sectiniz."<<endl
-						<<"Sifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Transposition / ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(transpositionSifreleme(metin, 3));
-					dosyaKaydet("\n");
-					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-			
-					cout<<"Metnin sifrelenmis hali: "<<transpositionSifreleme(metin, 3);
-					break;
-						
-				case 2:
-					cout<<"Affine sifreleme yontemini sectiniz."<<endl
-						<<"Sifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Affine / ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(affineSifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-			
-					cout<<"Metnin sifrelenmis hali: "<<metin;
-					break;
-				
-				case 3:
-					cout<<"Sezar sifreleme yontemini sectiniz."<<endl
-						<<"Sifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Sezar / ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(sezarSifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-			
-					cout<<"Metnin sifrelenmis hali: "<<metin;
-					break;
-				
-				case 4:
-				{
-					string text;
-					cout<<"Fplsc sifreleme yontemini sectiniz."<<endl
-						<<"Sifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					getline(cin, text);
-					
-					dosyaKaydet("Fplsc / ");
-					dosyaKaydet(text);
-					dosyaKaydet(" = ");
-					dosyaKaydet(Fplsc(text));
-					dosyaKaydet("\n");
-					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-					
-   					cout<<"Metnin sifrelenmis hali: "<<Fplsc(text);
-					break;
-				}
-				
-				case 5:
-					cout<<"Vigenere sifreleme yontemini sectiniz."<<endl
-						<<"Sifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Vigenere / ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(vigenereSifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-					
-					cout<<"Metnin sifrelenmis hali: "<<vigenereSifreleme(metin);
-					break;
-					
-				default:
-					cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
-					goto b;
-			}
-			break;
-			
-		case 2:
-			cout<<"Desifreleme yontemi seciniz. \n1-Sezar \n2-Transposition \n3-Affine \n4-Fplsc \n5-Vigenere \n";
-			c:
-			cout<<">-<\n ";
-			cin>>secim2;
-			cout<<">-<\n";
-			
-			switch(secim2)
-			{
-				case 1:
-					cout<<"Transposition desifreleme yontemini sectiniz."<<endl
-						<<"Desifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-								
-					dosyaKaydet("Transposition \\ ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(transpositionDesifreleme(metin, 3));
-					dosyaKaydet("\n");
-					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-
-					cout<<"Metnin desifrelenmis hali: "<<transpositionDesifreleme(metin, 3);
-					break;
-					
-				case 2:
-					cout<<"Affine desifreleme yontemini sectiniz."<<endl
-						<<"Desifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Affine \\ ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(affineDesifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-			
-					cout<<"Metnin desifrelenmis hali: "<<metin;
-					break;
-					
-				case 3:
-					cout<<"Sezar desifreleme yontemini sectiniz."<<endl
-						<<"Desifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Sezar \\ ");
-					dosyaKaydet(metin);
-        		    dosyaKaydet(" = ");
-					dosyaKaydet(sezarDesifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-			
-					cout<<"Metnin desifrelenmis hali: "<<metin;
-					break;
-				
-				case 4:
-					{
-					string text;
-					cout<<"Fplsc desifreleme yontemini sectiniz."<<endl
-						<<"Desifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					getline(cin, text);
-					
-					dosyaKaydet("Fplsc \\ ");
-					dosyaKaydet(text);
-					dosyaKaydet(" = ");
-					dosyaKaydet(Fplsc(text));
-					dosyaKaydet("\n");
-					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-					
-   					cout<<"Metnin desifrelenmis hali: "<<Fplsc(text);
-					break;
-					}
-				
-				case 5:
-					cout<<"Vigenere desifreleme yontemini sectiniz."<<endl
-						<<"Desifrelemek istediginiz metni giriniz: ";
-					cin.ignore();
-					cin.getline(metin, 50);
-					
-					dosyaKaydet("Vigenere \\ ");
-					dosyaKaydet(metin);
-					dosyaKaydet(" = ");
-					dosyaKaydet(vigenereDesifreleme(metin));
-					dosyaKaydet("\n");
-					cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
-					
-					cout<<"Desifrelenmis metin: "<<vigenereDesifreleme(metin);
-					break;	
-					
-				default:
-					cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
-					goto c;
-			}
-			break;
-
-		default:
-			cout<<"Yalnizca 1 veya 2 seciniz. \n";
-			goto a;
-	}
+		cout<<"Merhabalar! Yapmak istediginiz islemi seciniz. \n1-Sifreleme \n2-Desifreleme \n0-Kapat \n";
+		a:
+		cout<<">-<\n ";
+		cin>>secim;
+		cout<<">-<\n";
 	
+		switch(secim)
+		{
+			case 1:
+				cout<<"Sifreleme yontemi seciniz. \n1-Transposition \n2-Affine \n3-Sezar \n4-Fplsc \n5-Vigenere \n";
+				b:
+				cout<<">-<\n ";
+				cin>>secim2;
+				cout<<">-<\n";
+				
+				switch(secim2)
+				{
+					case 1:
+						cout<<"Transposition sifreleme yontemini sectiniz."<<endl
+							<<"Sifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Transposition / ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(transpositionSifreleme(metin, 3));
+						dosyaKaydet("\n");
+						cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+				
+						cout<<"Metnin sifrelenmis hali: "<<transpositionSifreleme(metin, 3);
+						break;
+							
+					case 2:
+						cout<<"Affine sifreleme yontemini sectiniz."<<endl
+							<<"Sifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Affine / ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(affineSifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+				
+						cout<<"Metnin sifrelenmis hali: "<<metin;
+						break;
+					
+					case 3:
+						cout<<"Sezar sifreleme yontemini sectiniz."<<endl
+							<<"Sifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Sezar / ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(sezarSifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+				
+						cout<<"Metnin sifrelenmis hali: "<<metin;
+						break;
+					
+					case 4:
+					{
+						string text;
+						cout<<"Fplsc sifreleme yontemini sectiniz."<<endl
+							<<"Sifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						getline(cin, text);
+						
+						dosyaKaydet("Fplsc / ");
+						dosyaKaydet(text);
+						dosyaKaydet(" = ");
+						dosyaKaydet(Fplsc(text));
+						dosyaKaydet("\n");
+						cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+						
+	   					cout<<"Metnin sifrelenmis hali: "<<Fplsc(text);
+						break;
+					}
+					
+					case 5:
+						cout<<"Vigenere sifreleme yontemini sectiniz."<<endl
+							<<"Sifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Vigenere / ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(vigenereSifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Metniniz ve sifreniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+						
+						cout<<"Metnin sifrelenmis hali: "<<vigenereSifreleme(metin);
+						break;
+						
+					default:
+						cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
+						goto b;
+				}
+				break;
+				
+			case 2:
+				cout<<"Desifreleme yontemi seciniz. \n1-Sezar \n2-Transposition \n3-Affine \n4-Fplsc \n5-Vigenere \n";
+				c:
+				cout<<">-<\n ";
+				cin>>secim2;
+				cout<<">-<\n";
+				
+				switch(secim2)
+				{
+					case 1:
+						cout<<"Transposition desifreleme yontemini sectiniz."<<endl
+							<<"Desifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+									
+						dosyaKaydet("Transposition \\ ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(transpositionDesifreleme(metin, 3));
+						dosyaKaydet("\n");
+						cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+	
+						cout<<"Metnin desifrelenmis hali: "<<transpositionDesifreleme(metin, 3);
+						break;
+						
+					case 2:
+						cout<<"Affine desifreleme yontemini sectiniz."<<endl
+							<<"Desifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Affine \\ ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(affineDesifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+				
+						cout<<"Metnin desifrelenmis hali: "<<metin;
+						break;
+						
+					case 3:
+						cout<<"Sezar desifreleme yontemini sectiniz."<<endl
+							<<"Desifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Sezar \\ ");
+						dosyaKaydet(metin);
+	        		    dosyaKaydet(" = ");
+						dosyaKaydet(sezarDesifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+				
+						cout<<"Metnin desifrelenmis hali: "<<metin;
+						break;
+					
+					case 4:
+						{
+						string text;
+						cout<<"Fplsc desifreleme yontemini sectiniz."<<endl
+							<<"Desifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						getline(cin, text);
+						
+						dosyaKaydet("Fplsc \\ ");
+						dosyaKaydet(text);
+						dosyaKaydet(" = ");
+						dosyaKaydet(Fplsc(text));
+						dosyaKaydet("\n");
+						cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+						
+	   					cout<<"Metnin desifrelenmis hali: "<<Fplsc(text);
+						break;
+						}
+					
+					case 5:
+						cout<<"Vigenere desifreleme yontemini sectiniz."<<endl
+							<<"Desifrelemek istediginiz metni giriniz: ";
+						cin.ignore();
+						cin.getline(metin, 50);
+						
+						dosyaKaydet("Vigenere \\ ");
+						dosyaKaydet(metin);
+						dosyaKaydet(" = ");
+						dosyaKaydet(vigenereDesifreleme(metin));
+						dosyaKaydet("\n");
+						cout<<"Sifreniz ve metniniz sifrelemeLog.txt isimli log dosyasina kaydedildi.\n";
+						
+						cout<<"Desifrelenmis metin: "<<vigenereDesifreleme(metin);
+						break;	
+						
+					default:
+						cout<<"Yalnizca 1, 2, 3, 4 ve 5 sayilarindana birini seciniz. \n";
+						goto c;
+				}
+				break;
+				
+			case 0:
+				cout<<"Program kapatildi.";
+				break;
+				
+			default:
+				cout<<"Yalnizca 1 veya 2 seciniz. \n";
+				goto a;
+		}
+		cout<<"\n----------------------------------------------------------------------\n";
+	}
 	return 0;
 }
 string transpositionSifreleme(char metin[], int anahtar) 
