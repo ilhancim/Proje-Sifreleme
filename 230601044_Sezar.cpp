@@ -29,7 +29,7 @@ int main()
 	int secim;
 	char metin[50];
 	
-	cout<<"Sezar sifreleme yöntemini kullacanaksiniz\n1-Sifreleme\n2-Desifreleme\n";
+	cout<<"Sezar sifreleme yÃ¶ntemini kullacanaksiniz\n1-Sifreleme\n2-Desifreleme\n";
 	a:
 	cout<<">-<\n ";
 	cin>>secim;
